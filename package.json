@@ -1,6 +1,6 @@
 {
   "name": "akyos-animation",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Akyos Animation est une librairie JavaScript légère et modulaire permettant d'ajouter facilement des animations fluides et performantes via des classes ou des attributs HTML",
   "main": "dist/akyos-animation.cjs.js",
   "module": "dist/akyos-animation.esm.js",
@@ -18,6 +18,13 @@
     "type": "git",
     "url": "https://github.com/akyoscommunication/akyos-animation.git"
   },
+  "keywords": [
+    "animation",
+    "gsap",
+    "akyos",
+    "akyos-animation",
+    "akyoscommunication"
+  ],
   "size-limit": [
     {
       "path": "dist/akyos-animation.esm.js",
