@@ -1,6 +1,6 @@
 {
   "name": "akyos-animation",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Akyos Animation est une librairie JavaScript légère et modulaire permettant d'ajouter facilement des animations fluides et performantes via des classes ou des attributs HTML",
   "main": "dist/akyos-animation.cjs.js",
   "module": "dist/akyos-animation.esm.js",
