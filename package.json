@@ -9,11 +9,11 @@
     "url": "https://github.com/akyoscommunication/akyos-animation.git"
   },
   "main": "dist/akyos-animations.umd.js",
-  "module": "dist/akyos-animations.esm.js",
+  "module": "dist/akyos-animations.es.js",
   "exports": {
     ".": {
       "require": "./dist/akyos-animations.umd.js",
-      "import": "./dist/akyos-animations.esm.js"
+      "import": "./dist/akyos-animations.es.js"
     }
   },
   "scripts": {
