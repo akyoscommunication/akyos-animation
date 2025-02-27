@@ -1,19 +1,13 @@
 type AnimationClass = new (element: HTMLElement, options: any) => any;
 
-import {createRequire} from 'module';
-
-const require = createRequire(import.meta.url);
-
-// Exemple : Charger un module commun "animations"
-
 class AkyosInitializer {
 	private animations: Record<string, () => Promise<{ default: AnimationClass }>>
 
 	constructor() {
 		this.animations = {
-			textOverflow: () => require("../animations/AkyosTextOverflow"),
-			wipe: () => require("../animations/AkyosWipe"),
-			mask: () => require("../animations/AkyosMask"),
+			textOverflow: () => import("../animations/AkyosTextOverflow"),
+			wipe: () => import("../animations/AkyosWipe"),
+			mask: () => import("../animations/AkyosMask"),
 		}
 	}
 
