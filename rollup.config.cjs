@@ -36,7 +36,7 @@ export default {
         typescript({
             tsconfig: "./tsconfig.json",
             useTsconfigDeclarationDir: true,
-            tslib: import("tslib"), // Ajoute explicitement l'utilisation de tslib
+            tslib: require.resolve("tslib"), // Ajoute explicitement l'utilisation de tslib
         }),
         babel({
             babelHelpers: "bundled",
