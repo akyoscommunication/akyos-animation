@@ -1,6 +1,4 @@
-// @ts-ignore
 import gsap from "gsap";
-// @ts-ignore
 import {ScrollTrigger} from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
