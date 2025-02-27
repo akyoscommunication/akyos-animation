@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
-    "target": "ES6",
-    "module": "ESNext",
-    "declaration": true,
-    "declarationDir": "dist/types",
-    "outDir": "dist",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true
+	"target": "ES6",
+	"module": "ESNext",
+	"declaration": true,
+	"declarationDir": "dist/types",
+	"outDir": "dist",
+	"strict": true,
+	"esModuleInterop": true,
+	"skipLibCheck": true,
+	"forceConsistentCasingInFileNames": true,
+	"importHelpers": true
   },
-  "include": ["src"]
+  "include": [
+	"src"
+  ]
 }

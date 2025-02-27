@@ -11,25 +11,35 @@ class AkyosInitializer {
 		}
 	}
 
-	public async init() {
-		for (const element of document.querySelectorAll("[akyos-animation-name]")) {
+	public init() {
+		// Utilisation de Promises plutôt que 'async/await'
+		const elements = document.querySelectorAll("[akyos-animation-name]");
+		const promises: Promise<void>[] = [];
+
+		elements.forEach((element) => {
 			const el = <HTMLElement>element;
-			const name = element.getAttribute("akyos-animation-name")
+			const name = element.getAttribute("akyos-animation-name");
 			const options = this.getOptions(el);
 
 			if (name && this.animations[name]) {
-				try {
-					const module = await this.animations[name]();
-					const AnimationClass = module.default;
-					new AnimationClass(el, options);
-				} catch (error) {
-					console.error(`AkyosAnimation: Error loading animation ${name}`, error)
-				}
-
+				const promise = this.animations[name]()
+					.then((module) => {
+						const AnimationClass = module.default;
+						new AnimationClass(el, options);
+					})
+					.catch((error) => {
+						console.error(`AkyosAnimation: Error loading animation ${name}`, error);
+					});
+				promises.push(promise);
 			} else {
-				console.warn(`AkyosAnimation: Animation ${name} not found`)
+				console.warn(`AkyosAnimation: Animation ${name} not found`);
 			}
-		}
+		});
+
+		// Gérer toutes les promesses si nécessaire
+		Promise.all(promises).then(() => {
+			console.log("All animations initialized");
+		});
 	}
 
 	getOptions(element: HTMLElement): Record<string, any> {
@@ -47,6 +57,6 @@ class AkyosInitializer {
 
 document.addEventListener("DOMContentLoaded", () => {
 	new AkyosInitializer().init();
-})
+});
 
 export default AkyosInitializer;
