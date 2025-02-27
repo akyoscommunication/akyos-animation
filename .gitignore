@@ -3,3 +3,4 @@ dist/
 .yarn/
 .env
 .DS_Store
+docs/
