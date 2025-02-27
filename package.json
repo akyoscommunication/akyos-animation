@@ -10,8 +10,10 @@
   "style": "dist/akyos-animation.css",
   "license": "MIT",
   "scripts": {
-	"build": "cross-env NODE_ENV=production rollup -c --bundleConfigAsCjs",
+	"build:rollup": "cross-env NODE_ENV=production rollup -c --bundleConfigAsCjs",
 	"dev": "cross-env NODE_ENV=development rollup -c --bundleConfigAsCjs",
+	"build:types": "tsc",
+	"build": "npm run build:types && npm run build:rollup",
 	"prepare": "npm run build",
 	"size": "size-limit"
   },

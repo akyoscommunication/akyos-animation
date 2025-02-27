@@ -2,7 +2,6 @@
 import gsap from "gsap";
 // @ts-ignore
 import {ScrollTrigger} from "gsap/ScrollTrigger";
-import from = gsap.from;
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -50,6 +49,8 @@ class AkyosTextOverflow {
 
     animate() {
         const fromPosition = this.options.from === 'down' ? '100%' : '-100%';
+
+        if (!this.innerSpan) return;
 
         gsap.fromTo(
             this.innerSpan,

@@ -1,17 +1,15 @@
 {
   "compilerOptions": {
-	"target": "ES6",
-	"module": "ESNext",
-	"declaration": true,
-	"declarationDir": "dist/types",
-	"outDir": "dist",
-	"strict": true,
+	"target": "ESNext",                   // Syntaxe ESNext pour JavaScript
+	"module": "ESNext",                   // Gestion des modules ES
+	"outDir": "./dist/types",             // Les fichiers sortent dans "dist/types"
+	"declaration": true,                  // On veut des fichiers .d.ts aussi
+	"declarationDir": "./dist/types",     // Emplacement des définitions de type
+	"emitDeclarationOnly": false,         // Assure que les `.js` sont générés
+	"moduleResolution": "node",           // Résolution pour Node.js
 	"esModuleInterop": true,
-	"skipLibCheck": true,
-	"forceConsistentCasingInFileNames": true,
-	"importHelpers": true
+	"strict": true
   },
-  "include": [
-	"src"
-  ]
+  "include": ["src/animations/**/*"],     // Inclut uniquement les fichiers nécessaires
+  "exclude": ["node_modules", "dist"]     // Exclut les fichiers générés
 }

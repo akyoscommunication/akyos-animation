@@ -11,11 +11,13 @@ class AkyosScroll {
     constructor(options: LenisOptions = {}) {
         gsap.registerPlugin(ScrollTriger);
 
+        // @ts-ignore
         this.lenis = new Lenis(...options, {
             autoRaf: true
         });
 
-        this.lenis.on('scroll', ScrollTriger.update)
+        // @ts-ignore
+        this.lenis.on('scroll', ScrollTriger);
         gsap.ticker.add((time: number) => {
             this.lenis.raf(time * 1000)
         })
