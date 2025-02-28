@@ -64,9 +64,10 @@ Vous pouvez surcharger les styles si besoin :
 
 Voici les animations actuellement supportées par la librairie, avec leur configuration classique :
 
-| Animation         | Classe JS            | Exemple de Style ou Effet |
-|------------------|---------------------|---------------------------|
+| Animation         | Classe JS           | Exemple de Style ou Effet                   |
+|-------------------|---------------------|---------------------------------------------|
 | **Text Overflow** | `AkyosTextOverflow` | Défilement vertical doux et fluide du texte |
+| **Smooth Scroll** | `AkyosScroll`       | Vitesse de défilement de la page            |
 
 ---
 
@@ -118,6 +119,7 @@ Ci-dessous la structure globale après compilation :
 /src
   /animations
     AkyosTextOverflow.ts  # Classe principale pour les animations textuelles
+    AkyosScroll.ts        # Classe principale pour les animations de défilement
   /assets
     main.scss             # Fichier SCSS avec les styles de base
   index.ts               # Point d'entrée principal pour les exports

@@ -13,6 +13,7 @@ if (process.env.NODE_ENV !== 'test') {
  * @property {string} [easing='power2.out'] - Type d'accélération de l'animation.
  * @property {number|string} [start='top 80%'] - Point de départ de l'animation.
  * @property {'up'|'down'} [from='down'] - Direction de départ de l'animation.
+ * @property {boolean} [markers=false] - Affiche les marqueurs de déclenchement de l'animation.
  * */
 
 export class AkyosTextOverflow {
@@ -38,6 +39,7 @@ export class AkyosTextOverflow {
 			easing: 'power2.out',
 			start: 'top 80%',
 			from: 'down',
+			markers: false,
 			...options
 		}
 
@@ -75,18 +77,18 @@ export class AkyosTextOverflow {
 
 		if (!this.innerSpan) return;
 
-		gsap.fromTo(this.innerSpan, {y: formPosition},
-			{
-				y: '0',
-				duration: this.options.duration,
-				delay: this.options.delay,
-				ease: this.options.easing,
-				scrollTrigger: this.options.start ? {
-					trigger: this.element,
-					start: this.options.start,
-					once: true
-				} : undefined
-			})
+		gsap.fromTo(this.innerSpan, {y: formPosition}, {
+			y: '0',
+			duration: this.options.duration,
+			delay: this.options.delay,
+			ease: this.options.easing,
+			scrollTrigger: this.options.start ? {
+				trigger: this.element,
+				start: this.options.start,
+				markers: this.options.markers,
+				once: true
+			} : undefined
+		})
 	}
 }
 
