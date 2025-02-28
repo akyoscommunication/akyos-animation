@@ -1,9 +1,7 @@
 # Akyos Animation
-
 🚀 **Akyos Animation** est une librairie JavaScript et CSS légère, modulaire et performante, permettant d'ajouter des animations fluides et personnalisables à vos projets.
 
 ## 📦 Installation
-
 Installez la librairie via npm ou yarn :
 
 ```sh
@@ -12,135 +10,151 @@ yarn add akyos-animation
 npm install akyos-animation
 ```
 
----
-
 ## 🚀 Utilisation
 
-### 1️⃣ **Avec JavaScript (paramétrage par code)**
+### **1️⃣ Avec les attributs HTML ([AkyosAttributeLoader](#fonctionnalit%C3%A9s-optionnelles))**
+La librairie peut être facilement utilisée en ajoutant des attributs HTML à vos éléments, sans écrire manuellement du JavaScript :
 
-Importez la classe souhaitée et appliquez-la à votre élément HTML en passant les options :
+```html
+<h1 akyos-animation-name="textOverflow" akyos-animation-duration="1.2" akyos-animation-delay="0.3">
+  Bonjour avec une animation !
+</h1>
+```
+
+Et dans vos scripts, initialisez simplement l'AkyosAttributeLoader :
+
+```javascript
+import { AkyosAttributeLoader } from "akyos-animation";
+
+// Initialisez le loader
+new AkyosAttributeLoader();
+```
+
+### **2️⃣ Utilisation directe avec JavaScript (paramétrage par code)**
+Importez la classe souhaitée et appliquez-la à votre élément HTML en passant les options suivantes :
 
 ```javascript
 import { AkyosTextOverflow } from "akyos-animation";
-import "akyos-animation/dist/styles.css"; // Import des styles
+import "akyos-animation/dist/styles.css"; // Importez les styles requis pour les animations
 
 // Sélectionnez l'élément à animer
 const element = document.querySelector(".my-element");
 
 // Initialisez une animation
 const animation = new AkyosTextOverflow(element, {
-  duration: 0.5,     // Durée : 0.5s
-  delay: 0.2,        // Délai : 0.2s
-  easing: "power2.out", // Courbe d'accélération
-  from: "up",        // Direction : 'up'
+  duration: 0.8,       // Durée de l'animation : 0.8s
+  delay: 0.2,          // Délai avant de commencer : 0.2s
+  easing: "power2.out" // Courbe d'accélération
 });
 ```
 
----
+## 🎭 Liste des Animations Disponibles
 
-### 2️⃣ **Avec SCSS (pour personnalisation supplémentaire)**
+| Animation       | Classe JS         | Effet                            |
+| -------------- | ---------------- | -------------------------------- |
+| **Text Overflow** | `AkyosTextOverflow` | Défilement fluide du texte   |
+| **Smooth Scroll** | `AkyosScroll` | Animation de défilement doux |
 
-La librairie inclut un fichier CSS précompilé que vous pouvez inclure directement dans votre projet ou via un fichier SCSS pour ajuster les styles.
+## ⚙️ Options Disponibles
+Les options suivantes peuvent être passées lors de l'initialisation d'une animation, que ce soit avec du JavaScript ou via les attributs HTML `akyos-animation-*`.
 
-Importez simplement les styles CSS dans votre projet SCSS comme suit :
+| Option     | Type         | Valeur par défaut | Description |
+| ---------- | ----------- | ---------------- | ----------- |
+| `duration` | `number`    | `0.6`            | Durée de l'animation en secondes |
+| `delay`    | `number`    | `0`              | Délai avant que l'animation ne débute (en secondes) |
+| `easing`   | `string`    | `"power2.out"`   | Courbe d'accélération (`GSAP`) |
+| `from`     | `"up" / "down"` | `"down"`    | Direction de l'animation |
+| `start`    | `string`    | `"top 80%"`      | Point de départ de l'animation dans `ScrollTrigger` |
+| `markers`  | `boolean`   | `false`          | Affiche (ou non) des marqueurs pour déboguer les points de déclenchement de l'animation |
+
+## 🌟 Utilisation avec les attributs HTML
+Pour simplifier l'intégration dans vos projets, vous pouvez utiliser des attributs HTML sur les éléments que vous souhaitez animer.
+
+### Exemple :
+
+```html
+<h1 akyos-animation-name="textOverflow" akyos-animation-duration="1.5" akyos-animation-delay="0.3">
+  Bonjour Monde !
+</h1>
+<div akyos-animation-name="textOverflow" akyos-animation-duration="2" akyos-animation-markers="true">
+  Une animation avec des marqueurs activés.
+</div>
+```
+
+L'attribut `akyos-animation-*` permet de passer directement les options, et l'animation sera appliquée dynamiquement via `AkyosAttributeLoader` :
+
+```javascript
+import { AkyosAttributeLoader } from "akyos-animation";
+
+new AkyosAttributeLoader(); // Initialise automatiquement les animations identifiées grâce aux attributs
+```
+
+## 📁 Fonctionnalités optionnelles
+
+### **AkyosAttributeLoader**
+Le `AkyosAttributeLoader` est une solution clé en main pour appliquer les animations en fonction des attributs HTML. Les paramètres des animations peuvent être définis dans vos templates/descriptions HTML grâce aux propriétés suivantes :
+
+| Attribut HTML              | Description |
+| ------------------------- | ----------- |
+| `akyos-animation-name`   | Nom de l'animation (ex. : `textOverflow`) |
+| `akyos-animation-duration` | Durée de l'animation (en secondes) |
+| `akyos-animation-delay`   | Délai avant le début de l'animation (en secondes) |
+| `akyos-animation-markers` | Active les marqueurs visuels (utile pour déboguer) |
+
+Cela vous permet d'éliminer toute logique JavaScript répétitive.
+
+## ✍️ Style et SCSS
+Possibilité de styliser et personnaliser les animations via les classes CSS ou SCSS.
+
+### **Import des styles**
+Ajoutez les styles nécessaires à vos animations dans vos fichiers SCSS :
 
 ```scss
 @import "akyos-animation/dist/styles.css";
-// soit
-@import "akyos-animation/styles";
 ```
 
-Vous pouvez surcharger les styles si besoin :
+Vous pouvez également surcharger ces styles avec vos propres classes :
+
 ```scss
 .akyos-animation-text-overflow {
   font-size: 2rem;
-  color: red !important;
+  color: blue;
 }
 ```
 
----
-
-## 🎭 Animations Disponibles
-
-Voici les animations actuellement supportées par la librairie, avec leur configuration classique :
-
-| Animation         | Classe JS           | Exemple de Style ou Effet                   |
-|-------------------|---------------------|---------------------------------------------|
-| **Text Overflow** | `AkyosTextOverflow` | Défilement vertical doux et fluide du texte |
-| **Smooth Scroll** | `AkyosScroll`       | Vitesse de défilement de la page            |
-
----
-
-## ⚙️ Options Disponibles
-
-| Option     | Type                   | Valeur par défaut | Description |
-|------------|------------------------|-------------------|-------------|
-| `duration`  | `number`               | `0.6`             | Durée de l'animation (en secondes) |
-| `delay`     | `number`               | `0`               | Délai avant le début de l'animation |
-| `easing`    | `string`               | `"power2.out"`    | Type d'accélération de l'animation (librairie `GSAP`) |
-| `from`      | `"up" / "down"`         | `"down"`          | Direction de l'animation |
-| `start`     | `string`               | `"top 80%"`       | Point de départ de l'animation (avec `ScrollTrigger`) |
-
-👉 Ces options peuvent être ajustées lors de l'initialisation de chaque classe, directement dans votre code JavaScript.
-
----
-
-### 🛠️ Développement Local
-
-Si vous souhaitez contribuer ou tester le projet localement, voici les étapes à suivre :
+## 🛠️ Développement Local
+Pour contribuer ou tester des modifications locales :
 
 1. Clonez le projet :
-   ```sh
-   git clone https://github.com/akyoscommunication/akyos-animation.git
-   cd akyos-animation
-   ```
+
+```sh
+git clone https://github.com/akyoscommunication/akyos-animation.git
+cd akyos-animation
+```
 
 2. Installez les dépendances :
-   ```sh
-   npm install
-   ```
 
-3. Lancez le build :
-   ```sh
-   npm run build
-   ```
-
-4. Testez les fichiers compilés dans un projet local :
-   ```sh
-   npm link
-   ```
-
----
-
-## 📁 Structure du projet
-
-Ci-dessous la structure globale après compilation :
-```
-/src
-  /animations
-    AkyosTextOverflow.ts  # Classe principale pour les animations textuelles
-    AkyosScroll.ts        # Classe principale pour les animations de défilement
-  /assets
-    main.scss             # Fichier SCSS avec les styles de base
-  index.ts               # Point d'entrée principal pour les exports
-/dist
-  styles.css             # Fichier CSS précompilé
-  index.js               # Fichier ESModule
-  index.cjs              # Fichier CommonJS
-  index.d.ts             # Fichier de types TypeScript
+```sh
+yarn install
 ```
 
----
+3. Lancez le développement en mode `watch` :
+
+```sh
+yarn dev
+```
+
+4. Pour livrer un build de production :
+
+```sh
+yarn build
+```
 
 ## 📝 À propos
-
-**Akyos Animation** a été développé avec des outils modernes comme **GSAP** et TypeScript.
+**Akyos Animation** a été développé en utilisant les dernières technologies modernes comme **GSAP** et **TypeScript**, garantissant performance et modularité.
 
 Pour plus d'informations, visitez notre site : [Akyos Communication](https://akyos.com).
 
----
-
 ## 🐝 Licence
-
-Distribué sous la licence **MIT** – À utiliser dans vos projets librement et à améliorer si vous le souhaitez !
+Cette librairie est distribuée sous la licence **MIT**. Utilisez-la librement dans vos projets !
 
