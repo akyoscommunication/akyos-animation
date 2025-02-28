@@ -1,0 +1,30 @@
+{
+  "exclude": [
+	"dist",
+	"node_modules"
+  ],
+  // Exclut dist et node_modules
+  "compilerOptions": {
+	/** Base Options */
+	"target": "es6",
+	"allowJs": true,
+	"resolveJsonModule": true,
+	"esModuleInterop": true,
+	"allowSyntheticDefaultImports": true,
+	"rootDir": "src",
+	"module": "ESNext",
+	"moduleResolution": "Node",
+	"outDir": "./dist",
+	"sourceMap": true,
+	/** Strictness (Laissez-le permissif si en pur JS) */
+	"strict": false,
+	/** Librairie */
+	"lib": [
+	  "ESNext",
+	  "DOM"
+	],
+	"declaration": true,
+	"skipLibCheck": true,
+	"emitDeclarationOnly": false
+  }
+}
