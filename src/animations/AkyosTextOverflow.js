@@ -15,7 +15,6 @@ if (process.env.NODE_ENV !== 'test') {
  * @property {'up'|'down'} [from='down'] - Direction de départ de l'animation.
  * */
 
-
 export class AkyosTextOverflow {
 
     /**
