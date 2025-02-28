@@ -1,64 +1,64 @@
 {
   "name": "akyos-animation",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Akyos Animation est une librairie JavaScript légère et modulaire permettant d'ajouter facilement des animations fluides et performantes via des classes ou des attributs HTML",
   "repository": {
-	"type": "git",
-	"url": "https://github.com/akyoscommunication/akyos-animation.git"
+    "type": "git",
+    "url": "https://github.com/akyoscommunication/akyos-animation.git"
   },
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-	".": {
-	  "import": "./dist/index.js",
-	  "types": "./dist/index.d.ts",
-	  "require": "./dist/index.cjs"
-	},
-	"./styles": "./dist/styles.css"
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs"
+    },
+    "./styles": "./dist/styles.css"
   },
   "files": [
-	"dist"
+    "dist"
   ],
   "style": "./dist/styles.css",
   "scripts": {
-	"docs": "jsdoc -c jsdoc.json",
-	"test": "jest --no-cache",
-	"build:css": "sass src/assets/main.scss dist/styles.css --style=compressed && terser dist/index.js --compress --mangle --output dist/index.min.js",
-	"build": "tsup && npm run test && npm run build:css",
-	"prepare": "npm run build"
+    "docs": "jsdoc -c jsdoc.json",
+    "test": "jest --no-cache",
+    "build:css": "sass src/assets/main.scss dist/styles.css --style=compressed && terser dist/index.js --compress --mangle --output dist/index.min.js",
+    "build": "tsup && npm run test && npm run build:css",
+    "prepare": "npm run build"
   },
   "keywords": [
-	"animation",
-	"gsap",
-	"akyos",
-	"akyos-animation",
-	"akyoscommunication",
-	"javascript",
-	"scroll animations",
-	"modular animations"
+    "animation",
+    "gsap",
+    "akyos",
+    "akyos-animation",
+    "akyoscommunication",
+    "javascript",
+    "scroll animations",
+    "modular animations"
   ],
   "peerDependencies": {
-	"gsap": "^3.12.7",
-	"lenis": "^1.1.21"
+    "gsap": "^3.12.7",
+    "lenis": "^1.1.21"
   },
   "devDependencies": {
-	"@babel/core": "^7.26.9",
-	"@babel/preset-env": "^7.26.9",
-	"babel-jest": "^29.7.0",
-	"jest": "^29.7.0",
-	"jest-environment-jsdom": "^29.7.0",
-	"jsdoc": "^4.0.4",
-	"node-sass": "^8.0.0",
-	"sass": "^1.85.1",
-	"terser": "^5.39.0",
-	"tsup": "^8.4.0",
-	"typescript": "^5.7.3"
+    "@babel/core": "^7.26.9",
+    "@babel/preset-env": "^7.26.9",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jsdoc": "^4.0.4",
+    "node-sass": "^8.0.0",
+    "sass": "^1.85.1",
+    "terser": "^5.39.0",
+    "tsup": "^8.4.0",
+    "typescript": "^5.7.3"
   },
   "dependencies": {
-	"@jest/globals": "^29.7.0",
-	"gsap": "^3.12.7",
-	"jest-mock": "^29.7.0"
+    "@jest/globals": "^29.7.0",
+    "gsap": "^3.12.7",
+    "jest-mock": "^29.7.0"
   }
 }
