@@ -5,7 +5,8 @@ export class AkyosAttributeLoader {
 	 */
 	constructor() {
 		this.animationsMap = {
-			textOverflow: () => import('../animations/AkyosTextOverflow.js')
+			textOverflow: () => import('../animations/AkyosTextOverflow.js'),
+			background: () => import('../animations/AkyosBackground.js'),
 		};
 
 		this.init();
@@ -15,7 +16,7 @@ export class AkyosAttributeLoader {
 	 * Initialisation des animations
 	 */
 	init() {
-		const animationElements = document.querySelectorAll('[akyos-animation-name');
+		const animationElements = document.querySelectorAll('[akyos-animation-name]');
 
 		animationElements.forEach((element) => {
 			const animationName = element.getAttribute('akyos-animation-name');

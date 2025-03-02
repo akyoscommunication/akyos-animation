@@ -1,7 +1,7 @@
 # Akyos Animation
 🚀 **Akyos Animation** est une librairie JavaScript et CSS légère, modulaire et performante, permettant d'ajouter des animations fluides et personnalisables à vos projets.
 
-## 📦 Installation
+## 🛆 Installation
 Installez la librairie via npm ou yarn :
 
 ```sh
@@ -35,7 +35,6 @@ Importez la classe souhaitée et appliquez-la à votre élément HTML en passant
 
 ```javascript
 import { AkyosTextOverflow } from "akyos-animation";
-import "akyos-animation/dist/styles.css"; // Importez les styles requis pour les animations
 
 // Sélectionnez l'élément à animer
 const element = document.querySelector(".my-element");
@@ -104,16 +103,19 @@ Le `AkyosAttributeLoader` est une solution clé en main pour appliquer les anima
 Cela vous permet d'éliminer toute logique JavaScript répétitive.
 
 ## ✍️ Style et SCSS
-Possibilité de styliser et personnaliser les animations via les classes CSS ou SCSS.
+Importation du style des animations et personnaliser les animations avec vos 
+propres styles.
 
-### **Import des styles**
-Ajoutez les styles nécessaires à vos animations dans vos fichiers SCSS :
+### **Import du styles**
+Ajoutez le style de la librairie pour les animations dans votre fichier 
+SCSS :
 
 ```scss
-@import "akyos-animation/dist/styles.css";
+@import "akyos-animation/styles";
 ```
 
-Vous pouvez également surcharger ces styles avec vos propres classes :
+Vous pouvez également surcharger les classes avec vos propres 
+style :
 
 ```scss
 .akyos-animation-text-overflow {
