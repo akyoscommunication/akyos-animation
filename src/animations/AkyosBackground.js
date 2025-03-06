@@ -1,3 +1,6 @@
+import gsap from "gsap";
+import {ScrollTrigger} from "gsap/ScrollTrigger.js";
+
 if (process.env.NODE_ENV !== 'test') {
     gsap.registerPlugin(ScrollTrigger);
 }
@@ -10,6 +13,7 @@ if (process.env.NODE_ENV !== 'test') {
  * @property {number|string} [end='bottom 20%'] - Point de fin de l'animation.
  * @property {string} [className='bg-primary'] - Classe CSS à ajouter à l'élément.
  * @property {HTMLElement} elementToAnimate - L'élément ou mettre la couleur de fond (className). Par défaut, c'est le body.
+ * @property {boolean} [markers=false] - Affiche les marqueurs de déclenchement de l'animation.
  */
 
 export class AkyosBackground {
@@ -30,8 +34,11 @@ export class AkyosBackground {
             end: 'bottom 20%',
             className: 'bg-primary',
             elementToAnimate: document.body, // Par défaut, on met la couleur de fond sur le body
+            markers: false,
             ...options
         }
+
+        this.init();
     }
 
     init() {
@@ -40,16 +47,30 @@ export class AkyosBackground {
 
     animate() {
         if (!this.options.elementToAnimate) return;
+        console.log('oui')
+
 
         gsap.to(this.options.elementToAnimate, {
             scrollTrigger: {
                 trigger: this.element,
                 start: this.options.start,
                 end: this.options.end,
-                scrub: true
+                scrub: true,
+                markers: this.options.markers,
+                onEnter: () => {
+                    this.options.elementToAnimate.classList.add(this.options.className);
+                },
+                onLeave: () => {
+                    this.options.elementToAnimate.classList.remove(this.options.className);
+                },
+                onEnterBack: () => {
+                    this.options.elementToAnimate.classList.add(this.options.className);
+                },
+                onLeaveBack: () => {
+                    this.options.elementToAnimate.classList.remove(this.options.className);
+                }
+
             },
-            className: this.options.className,
-            ease: 'none'
         });
     }
 }

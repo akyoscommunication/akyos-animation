@@ -1,0 +1,8 @@
+body {
+  transition: 0.5s cubic-bezier(.6, .07, 1, .55);
+
+  .bg-primary {
+    background: black;
+    color: white;
+  }
+}
