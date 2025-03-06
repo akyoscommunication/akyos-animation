@@ -47,8 +47,6 @@ export class AkyosBackground {
 
     animate() {
         if (!this.options.elementToAnimate) return;
-        console.log('oui')
-
 
         gsap.to(this.options.elementToAnimate, {
             scrollTrigger: {
