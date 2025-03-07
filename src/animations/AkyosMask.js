@@ -25,7 +25,7 @@ export class AkyosMask {
     constructor(element, options = {}) {
         if (!element) throw new Error('Element not found.');
 
-        console.log(element)
+        console.log(element, options)
     }
 }
 
