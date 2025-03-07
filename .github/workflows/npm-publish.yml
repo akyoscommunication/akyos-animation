@@ -1,9 +1,8 @@
 name: Publish to npm
 
 on:
-  push:
-    tags:
-      - 'v*'  # Déclenche l'action uniquement quand un tag commençant par "v" est poussé (ex: v1.0.0)
+  release:
+    types: [ created ]
 
 jobs:
   publish-npm:
