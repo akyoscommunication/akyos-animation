@@ -1,0 +1,47 @@
+.akyos-animation-mask {
+  &--right, &--left, &--top, &--bottom {
+    width: fit-content;
+  }
+
+  &--right {
+    mask-image: linear-gradient(90deg, #fff 0%, transparent 66.66%);
+    mask-size: 0 100%;
+    mask-repeat: no-repeat;
+
+    &.akyos-animation-mask--no-fade {
+      mask-image: linear-gradient(90deg, #fff 100%, transparent 100%);
+    }
+  }
+
+  &--left {
+    mask-image: linear-gradient(90deg, transparent 0%, #fff 66.66%);
+    -webkit-mask-position-x: right;
+    mask-size: 0 100%;
+    mask-repeat: no-repeat;
+
+    &.akyos-animation-mask--no-fade {
+      mask-image: linear-gradient(90deg, transparent 0%, #fff 0%);
+    }
+  }
+
+  &--top {
+    mask-image: linear-gradient(0deg, #fff 33.33%, transparent 66.66%);
+    -webkit-mask-position-y: bottom;
+    mask-size: 100% 0;
+    mask-repeat: no-repeat;
+
+    &.akyos-animation-mask--no-fade {
+      mask-image: linear-gradient(0deg, #fff 0%, transparent 0%);
+    }
+  }
+
+  &--bottom {
+    mask-image: linear-gradient(0deg, transparent 33.33%, #fff 66.66%);
+    mask-size: 100% 0;
+    mask-repeat: no-repeat;
+
+    &.akyos-animation-mask--no-fade {
+      mask-image: linear-gradient(0deg, transparent 0%, #fff 0%);
+    }
+  }
+}
