@@ -8,6 +8,7 @@ export class AkyosAttributeLoader {
             textOverflow: () => import('../animations/AkyosTextOverflow.js'),
             background: () => import('../animations/AkyosBackground.js'),
             translate: () => import('../animations/AkyosTranslate.js'),
+            mask: () => import('../animations/AkyosMask.js'),
         };
 
         this.init();
