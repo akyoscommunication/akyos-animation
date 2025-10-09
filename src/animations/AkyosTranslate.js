@@ -30,9 +30,8 @@ export class AkyosTranslate {
         this.element = element;
 
         this.options = {
-            start: 'top 80%',
+            start: 'top 85%',
             direction: 'top',
-            distance: 100,
             duration: 1,
             delay: 0,
             markers: false,
