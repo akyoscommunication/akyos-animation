@@ -30,7 +30,7 @@ export class AkyosMask {
         this.element = element;
 
         this.options = {
-            start: 'top 80%',
+            start: 'top 85%',
             duration: 1,
             delay: 0,
             markers: false,
