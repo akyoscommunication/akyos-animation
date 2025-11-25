@@ -1,4 +1,9 @@
-@use "animations/textOverflow";
 @use "animations/wipe";
 @use "animations/mask";
 @use "animations/scroll";
+
+[akyos-animation-name] {
+    @if akyos-animation-name == "translate" {
+      opacity: 0;
+    }
+}

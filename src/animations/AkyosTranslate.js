@@ -16,6 +16,8 @@ if (process.env.NODE_ENV !== 'test') {
  * @property {boolean} [markers=false] - Affiche les marqueurs de déclenchement de l'animation.
  * @property {boolean} [fade=true] - Applique un fondu à l'élément.
  * @property {string} [ease='power3.out'] - Fonction d'accélération de l'animation.
+ * @property {boolean} [scrub=true] - Synchronise l'animation avec le défilement.
+ * @property {number|string} [end='bottom bottom'] - Point de fin de l'animation.
  */
 export class AkyosTranslate {
 
@@ -30,23 +32,32 @@ export class AkyosTranslate {
         this.element = element;
 
         this.options = {
-            start: 'top 85%',
+            start: 'top bottom-=10%',
+            end: 'bottom bottom-=20%',
             direction: 'top',
             duration: 1,
             delay: 0,
             markers: false,
             fade: true,
-            ease: 'power3.out', ...options
+            ease: 'none', ...options,
+            scrub: 1,
+            distance: 100,
         }
 
         this.init();
     }
 
     init() {
+
+        if (!this.options.fade) {
+            this.element.style.opacity = '0';
+        }
+
         this.animate();
     }
 
     animate() {
+
         gsap.fromTo(this.element, {
             y: this.options.direction === 'top' ? this.options.distance : this.options.direction === 'bottom' ? -this.options.distance : 0,
             x: this.options.direction === 'left' ? this.options.distance : this.options.direction === 'right' ? -this.options.distance : 0,
@@ -59,7 +70,11 @@ export class AkyosTranslate {
             delay: this.options.delay,
             ease: this.options.ease,
             scrollTrigger: {
-                trigger: this.element, start: this.options.start, markers: this.options.markers,
+                trigger: this.element,
+                start: this.options.start,
+                end: this.options.end,
+                markers: this.options.markers,
+                scrub: this.options.scrub
             }
         })
     }

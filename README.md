@@ -13,6 +13,15 @@ yarn add akyos-animation
 npm install akyos-animation
 ```
 
+### **Import du styles**
+
+Ajoutez le style de la librairie pour les animations dans votre fichier
+SCSS:
+
+```scss
+@import "akyos-animation/styles";
+```
+
 ## 🚀 Utilisation
 
 ### **1️⃣ Avec les attributs HTML ([AkyosAttributeLoader](#fonctionnalit%C3%A9s-optionnelles))**
@@ -21,7 +30,7 @@ La librairie peut être facilement utilisée en ajoutant des attributs HTML à v
 JavaScript:
 
 ```html
-<h1 akyos-animation-name="textOverflow" akyos-animation-duration="1.2" akyos-animation-delay="0.3">
+<h1 akyos-animation-name="translate" akyos-animation-direction="left" akyos-animation-distance="150">
     Bonjour avec une animation !
 </h1>
 ```
@@ -40,30 +49,27 @@ new AkyosAttributeLoader();
 Importez la classe souhaitée et appliquez-la à votre élément HTML en passant les options suivantes:
 
 ```javascript
-import {AkyosTextOverflow} from "akyos-animation";
+import {AkyosTranslate} from "akyos-animation";
 
 // Sélectionnez l'élément à animer
 const element = document.querySelector(".my-element");
 
 // Initialisez une animation
-const animation = new AkyosTextOverflow(element, {
-    duration: 0.8,       // Durée de l'animation : 0.8s
-    delay: 0.2,          // Délai avant de commencer : 0.2s
-    easing: "power2.out" // Courbe d'accélération
+const animation = new AkyosTranslate(element, {
+    direction: 'left',       // Direction de l'animation : Gauche
+    distance: 150,          // Distance de la translation : 150px
 });
 ```
 
 ## 🎭 Liste des Animations Disponibles
 
-| Animation            | Classe JS           | Effet                                                 |
-|----------------------|---------------------|-------------------------------------------------------|
-| **Text Overflow**    | `AkyosTextOverflow` | Défilement fluide du texte                            |
-| **Smooth Scroll**    | `AkyosScroll`       | Animation de défilement doux                          |
-| **Background Color** | `AkyosBackground`   | Animation de changement de couleur de fond            |
-| **Mask**             | `AkyosMask`         | Effet d'apparition avec un masque                     |
-| **Parallax**         | `AkyosParallax`     | Effet de profondeur donnant une illusion de mouvement |
-
-| **Translate**         | `AkyosTranslate`     | Effet apparition avec translation |
+| Animation            | Classe JS / Attribute Name       | Effet                                                 |
+|----------------------|----------------------------------|-------------------------------------------------------|
+| **Smooth Scroll**    | `AkyosScroll` / `scroll`         | Animation de défilement doux                          |
+| **Background Color** | `AkyosBackground` / `background` | Animation de changement de couleur de fond            |
+| **Mask**             | `AkyosMask` / `mask`             | Effet d'apparition avec un masque                     |
+| **Parallax**         | `AkyosParallax` / `parallax`     | Effet de profondeur donnant une illusion de mouvement |
+| **Translate**         | `AkyosTranslate` / `translate`     | Effet apparition avec translation |
 
 ## ⚙️ Options Disponibles
 
@@ -73,31 +79,19 @@ via les attributs HTML `akyos-animation-*`.
 | Option             | Type                                  | Valeur par défaut | Description                                                                             |
 |--------------------|---------------------------------------|-------------------|-----------------------------------------------------------------------------------------|
 | `duration`         | `number`                              | `0.6`             | Durée de l'animation en secondes                                                        |
+| `distance`         | `number`                              | `100`             | Distance de l'animation en pixels `AkyosTranslate`                                      |
 | `delay`            | `number`                              | `0`               | Délai avant que l'animation ne débute (en secondes)                                     |
 | `easing`           | `string`                              | `"power2.out"`    | Courbe d'accélération (`GSAP`)                                                          |
 | `from`             | `"up" / "down"`                       | `"down"`          | Début de l'animation (TextOverflow)                                                     |
 | `start`            | `string`                              | `"top 80%"`       | Point de départ de l'animation dans `ScrollTrigger`                                     |
 | `end`              | `string`                              | `"bottom 20%"`    | Point de fin de l'animation dans `ScrollTrigger`                                        |
+| `scrub`            | `boolean`                             | `1`               | Utilise la progression de `ScrollTrigger` pour les animations                           |
 | `markers`          | `boolean`                             | `false`           | Affiche (ou non) des marqueurs pour déboguer les points de déclenchement de l'animation |
 | `direction`        | `"top" / "bottom" / "left" / "right"` | `"top"`           | Direction de l'animation                                                                |
 | `fade`             | `boolean`                             | `true`            | Effet de fade (Translate                                                                |
 | `className`        | `string`                              | `null`            | Classe CSS à ajouter à l'élément (Background Color)                                     |
 | `elementToAnimate` | `HTMLElement`                         | `body`            | L'élément ou mettre la couleur de fond (className) (Background Color).                  |
 
-
-
-## ✍️ Style et SCSS
-
-Importation du style des animations dans votre projet.
-
-### **Import du styles**
-
-Ajoutez le style de la librairie pour les animations dans votre fichier
-SCSS:
-
-```scss
-@import "akyos-animation/styles";
-```
 
 
 ## 🛠️ Développement Local
