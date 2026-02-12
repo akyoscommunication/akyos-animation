@@ -1,6 +1,7 @@
 @use "animations/wipe";
 @use "animations/mask";
 @use "animations/scroll";
+@use "animations/textOverflow";
 
 [akyos-animation-name] {
     @if akyos-animation-name == "translate" {
