@@ -16,6 +16,41 @@
       "types": "./dist/index.d.ts",
       "require": "./dist/index.cjs"
     },
+    "./animations/translate": {
+      "import": "./dist/animations/translate.js",
+      "types": "./dist/animations/translate.d.ts",
+      "require": "./dist/animations/translate.cjs"
+    },
+    "./animations/mask": {
+      "import": "./dist/animations/mask.js",
+      "types": "./dist/animations/mask.d.ts",
+      "require": "./dist/animations/mask.cjs"
+    },
+    "./animations/parallax": {
+      "import": "./dist/animations/parallax.js",
+      "types": "./dist/animations/parallax.d.ts",
+      "require": "./dist/animations/parallax.cjs"
+    },
+    "./animations/background": {
+      "import": "./dist/animations/background.js",
+      "types": "./dist/animations/background.d.ts",
+      "require": "./dist/animations/background.cjs"
+    },
+    "./animations/textoverflow": {
+      "import": "./dist/animations/textoverflow.js",
+      "types": "./dist/animations/textoverflow.d.ts",
+      "require": "./dist/animations/textoverflow.cjs"
+    },
+    "./animations/scroll": {
+      "import": "./dist/animations/scroll.js",
+      "types": "./dist/animations/scroll.d.ts",
+      "require": "./dist/animations/scroll.cjs"
+    },
+    "./loader": {
+      "import": "./dist/loader.js",
+      "types": "./dist/loader.d.ts",
+      "require": "./dist/loader.cjs"
+    },
     "./styles": "./dist/styles.css"
   },
   "files": [
@@ -27,6 +62,7 @@
     "test": "jest --no-cache",
     "build:css": "sass src/assets/main.scss dist/styles.css --style=compressed && terser dist/index.js --compress --mangle --output dist/index.min.js",
     "build": "tsup && npm run test && npm run build:css",
+    "build:analyze": "tsup && node scripts/analyze-size.js",
     "prepare": "npm run build"
   },
   "keywords": [
@@ -56,6 +92,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-mock": "^29.7.0",
     "jsdoc": "^4.0.4",
+    "rollup-plugin-visualizer": "^6.0.5",
     "sass": "^1.85.1",
     "terser": "^5.39.0",
     "tsup": "^8.4.0",

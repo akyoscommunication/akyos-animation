@@ -58,7 +58,10 @@ export class AkyosAttributeLoader {
 
         Array.from(element.attributes).forEach((attr) => {
             if (attr.name.startsWith("akyos-animation-") && attr.name !== "akyos-animation-name") {
-                const key = attr.name.replace('akyos-animation-', '');
+                // Convertir kebab-case en camelCase (ex: class-name -> className)
+                const key = attr.name
+                    .replace('akyos-animation-', '')
+                    .replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
 
                 options[key] = isNaN(Number(attr.value)) ? attr.value : Number(attr.value);
             }

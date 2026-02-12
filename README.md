@@ -1,180 +1,558 @@
 # Akyos Animation
 
-🚀 **Akyos Animation** est une librairie JavaScript et CSS légère, modulaire et performante, permettant d'ajouter des
-animations fluides et personnalisables à vos projets.
+🚀 **Akyos Animation** est une librairie JavaScript légère, modulaire et ultra-performante pour créer des animations fluides déclenchées au scroll.
 
-## 🛆 Installation
+## ✨ Caractéristiques
 
-Installez la librairie via npm ou yarn :
+- 🎯 **Léger** : ~1-2 kB par animation (avec tree-shaking)
+- 🎨 **Modulaire** : Importez uniquement ce dont vous avez besoin
+- ⚡ **Performant** : Basé sur GSAP & Lenis
+- 🔧 **Facile** : Utilisable avec des attributs HTML ou en JavaScript
+- 📱 **Responsive** : Fonctionne sur tous les appareils
+- ♿ **Accessible** : Compatible avec les préférences utilisateur
 
-```sh
-yarn add akyos-animation
-# ou avec npm
+---
+
+## 📦 Installation
+
+```bash
 npm install akyos-animation
+# ou
+yarn add akyos-animation
 ```
 
-### **Import du styles**
+### Dépendances peer requises
 
-Ajoutez le style de la librairie pour les animations dans votre fichier
-SCSS:
-
-```scss
-@import "akyos-animation/styles";
+```bash
+npm install gsap lenis
 ```
 
-## 🚀 Utilisation
+---
 
-### **1️⃣ Avec les attributs HTML ([AkyosAttributeLoader](#fonctionnalit%C3%A9s-optionnelles))**
+## 🚀 Démarrage rapide
 
-La librairie peut être facilement utilisée en ajoutant des attributs HTML à vos éléments, sans écrire manuellement du
-JavaScript:
+### Option 1 : Avec attributs HTML (Recommandé)
+
+Le moyen le plus simple ! Aucun JavaScript à écrire pour chaque animation.
 
 ```html
-<h1 akyos-animation-name="translate" akyos-animation-direction="left" akyos-animation-distance="150">
-    Bonjour avec une animation !
+<!-- Dans votre HTML -->
+<h1 akyos-animation-name="translate" 
+    akyos-animation-direction="left" 
+    akyos-animation-distance="100">
+    Mon titre animé
 </h1>
 ```
 
-Et dans vos scripts, initialisez simplement l'AkyosAttributeLoader:
-
 ```javascript
-import {AkyosAttributeLoader} from "akyos-animation";
+// Dans votre JavaScript (une seule fois)
+import { AkyosAttributeLoader } from 'akyos-animation';
 
-// Initialisez le loader
 new AkyosAttributeLoader();
 ```
 
-### **2️⃣ Utilisation directe avec JavaScript (paramétrage par code)**
+### Option 2 : En JavaScript
 
-Importez la classe souhaitée et appliquez-la à votre élément HTML en passant les options suivantes:
+Import global (charge toutes les animations) :
 
 ```javascript
-import {AkyosTranslate} from "akyos-animation";
+import { AkyosTranslate } from 'akyos-animation';
 
-// Sélectionnez l'élément à animer
-const element = document.querySelector(".my-element");
-
-// Initialisez une animation
-const animation = new AkyosTranslate(element, {
-    direction: 'left',       // Direction de l'animation : Gauche
-    distance: 150,          // Distance de la translation : 150px
+const element = document.querySelector('.my-element');
+new AkyosTranslate(element, {
+    direction: 'left',
+    distance: 150
 });
 ```
 
-## 🎭 Liste des Animations Disponibles
+**Import optimisé** (charge uniquement l'animation nécessaire) :
 
-| Animation            | Classe JS / Attribute Name       | Effet                                                 |
-|----------------------|----------------------------------|-------------------------------------------------------|
-| **Smooth Scroll**    | `AkyosScroll` / `scroll`         | Animation de défilement doux                          |
-| **Background Color** | `AkyosBackground` / `background` | Animation de changement de couleur de fond            |
-| **Mask**             | `AkyosMask` / `mask`             | Effet d'apparition avec un masque                     |
-| **Parallax**         | `AkyosParallax` / `parallax`     | Effet de profondeur donnant une illusion de mouvement |
-| **Translate**         | `AkyosTranslate` / `translate`     | Effet apparition avec translation |
+```javascript
+import { AkyosTranslate } from 'akyos-animation/animations/translate';
 
-## ⚙️ Options Disponibles
+const element = document.querySelector('.my-element');
+new AkyosTranslate(element, { direction: 'left' });
+```
 
-Les options suivantes peuvent être passées lors de l'initialisation d'une animation, que ce soit avec du JavaScript ou
-via les attributs HTML `akyos-animation-*`.
+### Import des styles
 
-| Option             | Type                                  | Valeur par défaut | Description                                                                             |
-|--------------------|---------------------------------------|-------------------|-----------------------------------------------------------------------------------------|
-| `duration`         | `number`                              | `0.6`             | Durée de l'animation en secondes                                                        |
-| `distance`         | `number`                              | `100`             | Distance de l'animation en pixels `AkyosTranslate`                                      |
-| `delay`            | `number`                              | `0`               | Délai avant que l'animation ne débute (en secondes)                                     |
-| `easing`           | `string`                              | `"power2.out"`    | Courbe d'accélération (`GSAP`)                                                          |
-| `from`             | `"up" / "down"`                       | `"down"`          | Début de l'animation (TextOverflow)                                                     |
-| `start`            | `string`                              | `"top 80%"`       | Point de départ de l'animation dans `ScrollTrigger`                                     |
-| `end`              | `string`                              | `"bottom 20%"`    | Point de fin de l'animation dans `ScrollTrigger`                                        |
-| `scrub`            | `boolean`                             | `1`               | Utilise la progression de `ScrollTrigger` pour les animations                           |
-| `markers`          | `boolean`                             | `false`           | Affiche (ou non) des marqueurs pour déboguer les points de déclenchement de l'animation |
-| `direction`        | `"top" / "bottom" / "left" / "right"` | `"top"`           | Direction de l'animation                                                                |
-| `fade`             | `boolean`                             | `true`            | Effet de fade (Translate                                                                |
-| `className`        | `string`                              | `null`            | Classe CSS à ajouter à l'élément (Background Color)                                     |
-| `elementToAnimate` | `HTMLElement`                         | `body`            | L'élément ou mettre la couleur de fond (className) (Background Color).                  |
+```scss
+// Dans votre fichier SCSS
+@import "akyos-animation/styles";
+```
 
+Ou directement en JavaScript :
 
+```javascript
+import 'akyos-animation/styles';
+```
 
-## 🛠️ Développement Local
+---
 
-Pour contribuer ou tester des modifications locales:
+## 🎭 Animations disponibles
 
-1. Clonez le projet:
+| Animation | Nom d'attribut | Description | Import optimisé |
+|-----------|----------------|-------------|-----------------|
+| **AkyosTranslate** | `translate` | Apparition avec translation (haut, bas, gauche, droite) | `akyos-animation/animations/translate` |
+| **AkyosMask** | `mask` | Révélation avec effet de masque directionnel | `akyos-animation/animations/mask` |
+| **AkyosTextOverflow** | `textOverflow` | Débordement de texte animé | `akyos-animation/animations/textoverflow` |
+| **AkyosParallax** | `parallax` | Effet parallaxe sur les images | `akyos-animation/animations/parallax` |
+| **AkyosBackground** | `background` | Changement de couleur de fond au scroll | `akyos-animation/animations/background` |
+| **AkyosScroll** | `scroll` | Défilement doux (smooth scroll) | `akyos-animation/animations/scroll` |
 
-```sh
+---
+
+## 📚 Documentation détaillée
+
+### 🔹 AkyosTranslate
+
+Fait apparaître un élément avec une translation et un effet de fondu.
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `direction` | `'top'` \| `'bottom'` \| `'left'` \| `'right'` | `'top'` | Direction de l'animation |
+| `distance` | `number` | `100` | Distance de translation en pixels |
+| `duration` | `number` | `1` | Durée de l'animation en secondes |
+| `delay` | `number` | `0` | Délai avant le début en secondes |
+| `fade` | `boolean` | `true` | Active l'effet de fondu |
+| `ease` | `string` | `'none'` | Courbe d'animation GSAP |
+| `start` | `string` | `'top bottom-=10%'` | Point de départ ScrollTrigger |
+| `end` | `string` | `'bottom bottom-=20%'` | Point de fin ScrollTrigger |
+| `scrub` | `number` | `1` | Synchronisation avec le scroll |
+| `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+#### Exemples
+
+```html
+<!-- Attributs HTML -->
+<div akyos-animation-name="translate" 
+     akyos-animation-direction="left" 
+     akyos-animation-distance="120">
+    Contenu
+</div>
+```
+
+```javascript
+// JavaScript
+import { AkyosTranslate } from 'akyos-animation/animations/translate';
+
+new AkyosTranslate(element, {
+    direction: 'right',
+    distance: 200,
+    duration: 1.5,
+    fade: true
+});
+```
+
+---
+
+### 🔹 AkyosMask
+
+Révèle un élément avec un effet de masque directionnel.
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `direction` | `'top'` \| `'bottom'` \| `'left'` \| `'right'` | `'right'` | Direction du masque |
+| `duration` | `number` | `1` | Durée de l'animation en secondes |
+| `delay` | `number` | `0` | Délai avant le début |
+| `fade` | `boolean` | `true` | Active l'effet de fondu progressif |
+| `ease` | `string` | `'power2.out'` | Courbe d'animation GSAP |
+| `start` | `string` | `'top 85%'` | Point de départ ScrollTrigger |
+| `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+#### Exemples
+
+```html
+<!-- Attributs HTML -->
+<div akyos-animation-name="mask" 
+     akyos-animation-direction="right">
+    Contenu masqué
+</div>
+```
+
+```javascript
+// JavaScript
+import { AkyosMask } from 'akyos-animation/animations/mask';
+
+new AkyosMask(element, {
+    direction: 'left',
+    duration: 1.2,
+    fade: false
+});
+```
+
+---
+
+### 🔹 AkyosTextOverflow
+
+Animation de texte avec effet de débordement (overflow).
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `from` | `'up'` \| `'down'` | `'down'` | Direction d'apparition du texte |
+| `duration` | `number` | `0.6` | Durée de l'animation en secondes |
+| `delay` | `number` | `0` | Délai avant le début |
+| `easing` | `string` | `'power2.out'` | Courbe d'animation GSAP |
+| `start` | `string` | `'top 80%'` | Point de départ ScrollTrigger |
+| `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+#### Exemples
+
+```html
+<!-- Attributs HTML -->
+<h1 akyos-animation-name="textOverflow" 
+    akyos-animation-from="down">
+    Titre animé
+</h1>
+```
+
+```javascript
+// JavaScript
+import { AkyosTextOverflow } from 'akyos-animation/animations/textoverflow';
+
+new AkyosTextOverflow(element, {
+    from: 'up',
+    duration: 0.8,
+    easing: 'power3.out'
+});
+```
+
+---
+
+### 🔹 AkyosParallax
+
+Effet parallaxe sur les images pour créer de la profondeur.
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `speed` | `number` | `1` | Vitesse de l'effet parallaxe |
+| `distance` | `number` | `200` | Distance de déplacement en pixels |
+| `stretch` | `number` | `200` | Étirement de l'image pour compenser |
+| `start` | `string` | `'top bottom'` | Point de départ ScrollTrigger |
+| `end` | `string` | `'bottom top'` | Point de fin ScrollTrigger |
+| `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+#### Structure HTML requise
+
+```html
+<div class="parallax-container" akyos-animation-name="parallax">
+    <img src="image.jpg" alt="Description">
+</div>
+```
+
+#### Exemples
+
+```javascript
+// JavaScript
+import { AkyosParallax } from 'akyos-animation/animations/parallax';
+
+new AkyosParallax(container, {
+    speed: 0.5,
+    distance: 300
+});
+```
+
+---
+
+### 🔹 AkyosBackground
+
+Change la couleur de fond d'un élément (généralement le body) au scroll.
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `className` | `string` | `'bg-primary'` | Classe CSS à ajouter/retirer |
+| `elementToAnimate` | `HTMLElement` | `document.body` | Élément cible pour la classe |
+| `start` | `string` | `'top 80%'` | Point de départ ScrollTrigger |
+| `end` | `string` | `'bottom 20%'` | Point de fin ScrollTrigger |
+| `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+#### CSS requis
+
+Définissez une transition CSS sur l'élément cible :
+
+```css
+body {
+    transition: background-color 0.6s ease-out, color 0.6s ease-out;
+}
+
+body.bg-primary {
+    background-color: #000;
+    color: #fff;
+}
+```
+
+#### Exemples
+
+```html
+<!-- Attributs HTML -->
+<section akyos-animation-name="background" 
+         akyos-animation-class-name="bg-dark">
+    Contenu de la section
+</section>
+```
+
+```javascript
+// JavaScript
+import { AkyosBackground } from 'akyos-animation/animations/background';
+
+new AkyosBackground(element, {
+    className: 'bg-dark',
+    elementToAnimate: document.body
+});
+```
+
+---
+
+### 🔹 AkyosScroll
+
+Active un défilement doux (smooth scroll) sur toute la page avec Lenis.
+
+#### Options
+
+| Option | Type | Défaut | Description |
+|--------|------|--------|-------------|
+| `lerp` | `number` | `0.1` | Lissage de la position (0-1) |
+| `duration` | `number` | `0.7` | Durée de l'animation de scroll |
+| `wheelMultiplier` | `number` | `0.7` | Multiplicateur de vitesse de la molette |
+
+#### Exemple
+
+```javascript
+// JavaScript uniquement (pas d'attribut HTML)
+import { AkyosScroll } from 'akyos-animation/animations/scroll';
+
+new AkyosScroll({
+    lerp: 0.1,
+    duration: 0.8,
+    wheelMultiplier: 0.8
+});
+```
+
+---
+
+## 🔧 AkyosAttributeLoader
+
+Charge automatiquement les animations depuis les attributs HTML.
+
+### Utilisation
+
+```javascript
+import { AkyosAttributeLoader } from 'akyos-animation/loader';
+
+// Charge toutes les animations présentes dans le DOM
+new AkyosAttributeLoader();
+```
+
+### Convention d'attributs
+
+- **Nom de l'animation** : `akyos-animation-name="nomAnimation"`
+- **Options** : `akyos-animation-option-name="valeur"`
+
+Les noms d'options en **kebab-case** sont automatiquement convertis en **camelCase**.
+
+Exemples :
+- `akyos-animation-class-name` → `className`
+- `akyos-animation-element-to-animate` → `elementToAnimate`
+
+---
+
+## 🎯 Méthodes de cycle de vie
+
+Toutes les animations disposent d'une méthode `destroy()` pour nettoyer les ressources.
+
+```javascript
+const animation = new AkyosTranslate(element, { direction: 'left' });
+
+// Plus tard, nettoyer l'animation
+animation.destroy();
+```
+
+Utile pour les frameworks SPA (React, Vue, Svelte) lors du démontage des composants.
+
+---
+
+## 💡 Exemples d'intégration
+
+### React
+
+```jsx
+import { useEffect, useRef } from 'react';
+import { AkyosTranslate } from 'akyos-animation/animations/translate';
+
+function MyComponent() {
+    const elementRef = useRef(null);
+    const animationRef = useRef(null);
+
+    useEffect(() => {
+        if (elementRef.current) {
+            animationRef.current = new AkyosTranslate(elementRef.current, {
+                direction: 'left',
+                distance: 100
+            });
+        }
+
+        return () => {
+            animationRef.current?.destroy();
+        };
+    }, []);
+
+    return <div ref={elementRef}>Contenu animé</div>;
+}
+```
+
+### Vue 3
+
+```vue
+<template>
+    <div ref="elementRef">Contenu animé</div>
+</template>
+
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { AkyosTranslate } from 'akyos-animation/animations/translate';
+
+const elementRef = ref(null);
+let animation = null;
+
+onMounted(() => {
+    animation = new AkyosTranslate(elementRef.value, {
+        direction: 'right',
+        distance: 120
+    });
+});
+
+onUnmounted(() => {
+    animation?.destroy();
+});
+</script>
+```
+
+### Vanilla JS avec attributs
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="path/to/akyos-animation/styles.css">
+</head>
+<body>
+    <h1 akyos-animation-name="translate" 
+        akyos-animation-direction="top" 
+        akyos-animation-distance="80">
+        Mon titre
+    </h1>
+
+    <script type="module">
+        import { AkyosAttributeLoader, AkyosScroll } from 'akyos-animation';
+        
+        // Smooth scroll
+        new AkyosScroll();
+        
+        // Active toutes les animations HTML
+        new AkyosAttributeLoader();
+    </script>
+</body>
+</html>
+```
+
+---
+
+## 🛠️ Développement
+
+### Installation
+
+```bash
 git clone https://github.com/akyoscommunication/akyos-animation.git
 cd akyos-animation
+npm install
 ```
 
-2. Installez les dépendances:
+### Scripts
 
-```sh
-yarn install
+```bash
+npm run build     # Build production
+npm run test      # Lance les tests
+npm run docs      # Génère la documentation JSDoc
 ```
 
-3. Lancez le développement en mode `watch` :
+### Tester en local
 
-```sh
-yarn dev
+#### Avec npm link
+
+```bash
+# Dans le dossier de la librairie
+npm link
+
+# Dans votre projet de test
+npm link akyos-animation
 ```
 
-4. Pour livrer un build de production :
+#### Avec chemin relatif
 
-```sh
-yarn build
+```bash
+# Dans votre projet de test
+npm install ../akyos-animation
 ```
-
-## 🚧 Tester la librairie en local (sans publication)
-
-Si vous souhaitez tester la librairie dans un projet de test sans la publier en production, deux options s'offrent à
-vous :
-
-### 1️⃣ Installation directe via un chemin local (`yarn add <path-lib>`)
-
-Vous pouvez ajouter la librairie directement à partir de son répertoire local en utilisant la commande suivante dans le
-chemin de votre projet de test :
-
-```sh
-# Depuis le projet de test :
-yarn add ./akyos-animation
-```
-
-Cela ajoutera la librairie à votre projet de test en se basant sur son chemin local.
 
 ---
 
-### 2️⃣ Utilisation d'un lien symbolique (`yarn link`)
+## 📊 Taille du bundle
 
-Pour créer un lien symbolique vers la librairie, suivez les étapes ci-dessous :
+Grâce au tree-shaking et aux imports optimisés :
 
-1. Dans le répertoire de la librairie, exécutez la commande suivante pour créer un lien symbolique global :
+- **Import global** : ~8-10 kB (toutes les animations)
+- **Import granulaire** : ~1-2 kB par animation
 
-```sh
-# Depuis le dossier de la librairie
-yarn link
+### Exemple d'optimisation
+
+```javascript
+// ❌ Charge tout (10 kB)
+import { AkyosTranslate } from 'akyos-animation';
+
+// ✅ Charge uniquement Translate (1.5 kB)
+import { AkyosTranslate } from 'akyos-animation/animations/translate';
 ```
-
-2. Ensuite, dans votre projet de test, créez un lien vers cette librairie en exécutant :
-
-```sh
-# Depuis le dossier de votre projet de test
-yarn link akyos-animation
-```
-
-Cette commande va créer un lien symbolique, permettant à votre projet de test de pointer vers la version locale de la
-librairie, sans avoir besoin de la publier.
 
 ---
 
-Ces méthodes permettent de tester facilement vos modifications locales avant de publier la librairie en production.
+## 🤝 Contribution
 
-## 📝 À propos
+Les contributions sont les bienvenues ! N'hésitez pas à :
 
-**Akyos Animation** a été développé en utilisant les dernières technologies modernes comme **GSAP** et **TypeScript**,
-garantissant performance et modularité.
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit vos changements (`git commit -m 'Add AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
 
-Pour plus d'informations, visitez notre site : [Akyos Communication](https://akyos.com).
+---
 
-## 🐝 Licence
+## 📝 License
 
-Cette librairie est distribuée sous la licence **MIT**. Utilisez-la librement dans vos projets!
+Distribué sous licence **MIT**. Voir `LICENSE` pour plus d'informations.
 
+---
+
+## 🏢 À propos
+
+Développé avec ❤️ par [Akyos Communication](https://akyos.com)
+
+**Technologies utilisées** : GSAP, Lenis, TypeScript, Sass
+
+---
+
+## 🔗 Liens utiles
+
+- [Documentation GSAP](https://greensock.com/docs/)
+- [Documentation Lenis](https://github.com/studio-freight/lenis)
+- [Site Akyos Communication](https://akyos.com)
