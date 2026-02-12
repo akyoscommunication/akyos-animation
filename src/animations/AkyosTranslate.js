@@ -39,9 +39,10 @@ export class AkyosTranslate {
             delay: 0,
             markers: false,
             fade: true,
-            ease: 'none', ...options,
+            ease: 'none',
             scrub: 1,
             distance: 100,
+            ...options
         }
 
         this.init();
@@ -58,7 +59,7 @@ export class AkyosTranslate {
 
     animate() {
 
-        gsap.fromTo(this.element, {
+        this.scrollTrigger = gsap.fromTo(this.element, {
             y: this.options.direction === 'top' ? this.options.distance : this.options.direction === 'bottom' ? -this.options.distance : 0,
             x: this.options.direction === 'left' ? this.options.distance : this.options.direction === 'right' ? -this.options.distance : 0,
             opacity: this.options.fade ? 0 : 1
@@ -77,6 +78,16 @@ export class AkyosTranslate {
                 scrub: this.options.scrub
             }
         })
+    }
+
+    /**
+     * Détruit l'instance et nettoie les ressources.
+     */
+    destroy() {
+        if (this.scrollTrigger) {
+            this.scrollTrigger.scrollTrigger?.kill();
+            this.scrollTrigger.kill();
+        }
     }
 }
 

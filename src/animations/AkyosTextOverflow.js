@@ -77,7 +77,7 @@ export class AkyosTextOverflow {
 
 		if (!this.innerSpan) return;
 
-		gsap.fromTo(this.innerSpan, {y: formPosition}, {
+		this.animation = gsap.fromTo(this.innerSpan, {y: formPosition}, {
 			y: '0',
 			duration: this.options.duration,
 			delay: this.options.delay,
@@ -89,6 +89,19 @@ export class AkyosTextOverflow {
 				once: true
 			} : undefined
 		})
+	}
+
+	/**
+	 * Détruit l'instance et nettoie les ressources.
+	 */
+	destroy() {
+		if (this.animation) {
+			this.animation.scrollTrigger?.kill();
+			this.animation.kill();
+		}
+		
+		// Nettoyer la classe ajoutée
+		this.element.classList.remove('akyos-animation-text-overflow');
 	}
 }
 

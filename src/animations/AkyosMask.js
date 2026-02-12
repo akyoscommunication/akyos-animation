@@ -87,7 +87,7 @@ export class AkyosMask {
             }
         }
 
-        gsap.fromTo(this.element, {
+        this.animation = gsap.fromTo(this.element, {
                 maskSize: formMaskSize(this.options.direction),
                 maskImage: this.element.style.maskImage
             },
@@ -105,6 +105,20 @@ export class AkyosMask {
                 } : undefined
             }
         )
+    }
+
+    /**
+     * Détruit l'instance et nettoie les ressources.
+     */
+    destroy() {
+        if (this.animation) {
+            this.animation.scrollTrigger?.kill();
+            this.animation.kill();
+        }
+        
+        // Nettoyer les classes ajoutées
+        this.element.classList.remove('akyos-animation-mask--' + this.options.direction);
+        this.element.classList.remove('akyos-animation-mask--no-fade');
     }
 }
 

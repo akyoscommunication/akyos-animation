@@ -1,7 +1,7 @@
 body {
-  transition: 0.5s cubic-bezier(.6, .07, 1, .55);
+  transition: background-color 0.5s cubic-bezier(.6, .07, 1, .55), color 0.5s cubic-bezier(.6, .07, 1, .55);
 
-  .bg-primary {
+  &.bg-primary {
     background: black;
     color: white;
   }

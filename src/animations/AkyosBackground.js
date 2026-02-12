@@ -48,28 +48,37 @@ export class AkyosBackground {
     animate() {
         if (!this.options.elementToAnimate) return;
 
-        gsap.to(this.options.elementToAnimate, {
-            scrollTrigger: {
-                trigger: this.element,
-                start: this.options.start,
-                end: this.options.end,
-                scrub: true,
-                markers: this.options.markers,
-                onEnter: () => {
-                    this.options.elementToAnimate.classList.add(this.options.className);
-                },
-                onLeave: () => {
-                    this.options.elementToAnimate.classList.remove(this.options.className);
-                },
-                onEnterBack: () => {
-                    this.options.elementToAnimate.classList.add(this.options.className);
-                },
-                onLeaveBack: () => {
-                    this.options.elementToAnimate.classList.remove(this.options.className);
-                }
-
+        this.scrollTrigger = ScrollTrigger.create({
+            trigger: this.element,
+            start: this.options.start,
+            end: this.options.end,
+            scrub: true,
+            markers: this.options.markers,
+            onEnter: () => {
+                this.options.elementToAnimate.classList.add(this.options.className);
             },
+            onLeave: () => {
+                this.options.elementToAnimate.classList.remove(this.options.className);
+            },
+            onEnterBack: () => {
+                this.options.elementToAnimate.classList.add(this.options.className);
+            },
+            onLeaveBack: () => {
+                this.options.elementToAnimate.classList.remove(this.options.className);
+            }
         });
+    }
+
+    /**
+     * Détruit l'instance et nettoie les ressources.
+     */
+    destroy() {
+        if (this.scrollTrigger) {
+            this.scrollTrigger.kill();
+        }
+        
+        // Nettoyer la classe ajoutée
+        this.options.elementToAnimate?.classList.remove(this.options.className);
     }
 }
 

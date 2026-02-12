@@ -48,13 +48,17 @@ export class AkyosParallax {
         const img = this.element.querySelector('img');
         if (!img) return;
 
+        this.img = img;
+        this.originalHeight = img.style.height;
+        this.originalObjectPosition = img.style.objectPosition;
+
         img.style.height = img.parentElement.offsetHeight + this.options.stretch + 'px';
 
         const parallaxAmount = Math.round(-this.options.distance * this.options.speed);
 
         img.style.objectPosition = `center ${parallaxAmount * 2}px`;
 
-        gsap.to(img, {
+        this.animation = gsap.to(img, {
             objectPosition: `center ${parallaxAmount * 0.8}px`,
             ease: 'none',
             scrollTrigger: {
@@ -66,6 +70,22 @@ export class AkyosParallax {
             }
         })
 
+    }
+
+    /**
+     * Détruit l'instance et nettoie les ressources.
+     */
+    destroy() {
+        if (this.animation) {
+            this.animation.scrollTrigger?.kill();
+            this.animation.kill();
+        }
+        
+        // Restaurer les styles d'origine
+        if (this.img) {
+            this.img.style.height = this.originalHeight;
+            this.img.style.objectPosition = this.originalObjectPosition;
+        }
     }
 }
 

@@ -42,19 +42,34 @@ export class AkyosScroll {
 	 * Initialise l'effet de défilement.
 	 */
 	animate() {
-		const lenis = new Lenis({
+		this.lenis = new Lenis({
 			lerp: this.options.lerp,
 			duration: this.options.duration,
 			wheelMultiplier: this.options.wheelMultiplier
 		});
 
-		lenis.on('scroll', ScrollTrigger.update);
+		this.lenis.on('scroll', ScrollTrigger.update);
 
-		gsap.ticker.add((time) => {
-			lenis.raf(time * 1000);
-		});
+		this.rafCallback = (time) => {
+			this.lenis.raf(time * 1000);
+		};
+
+		gsap.ticker.add(this.rafCallback);
 
 		gsap.ticker.lagSmoothing(0);
+	}
+
+	/**
+	 * Détruit l'instance et nettoie les ressources.
+	 */
+	destroy() {
+		if (this.rafCallback) {
+			gsap.ticker.remove(this.rafCallback);
+		}
+		
+		if (this.lenis) {
+			this.lenis.destroy();
+		}
 	}
 }
 
