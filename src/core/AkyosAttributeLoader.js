@@ -9,7 +9,7 @@ export class AkyosAttributeLoader {
             translate: () => import('../animations/AkyosTranslate.js'),
             mask: () => import('../animations/AkyosMask.js'),
             parallax: () => import('../animations/AkyosParallax.js'),
-            textoverflow: () => import('../animations/AkyosTextOverflow.js'),
+            textOverflow: () => import('../animations/AkyosTextOverflow.js'),
         };
 
         this.init();
