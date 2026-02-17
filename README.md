@@ -1,5 +1,7 @@
 # Akyos Animation
 
+> **→ [Voir la démo en ligne](https://animation.akyos.com)** · [npm](https://www.npmjs.com/package/akyos-animation)
+
 🚀 **Akyos Animation** est une librairie JavaScript légère, modulaire et ultra-performante pour créer des animations fluides déclenchées au scroll.
 
 ## ✨ Caractéristiques

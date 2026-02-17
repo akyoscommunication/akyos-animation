@@ -52,7 +52,8 @@
       "types": "./dist/loader.d.ts",
       "require": "./dist/loader.cjs"
     },
-    "./styles": "./dist/styles.css"
+    "./styles": "./dist/styles.css",
+    "./package.json": "./package.json"
   },
   "files": [
     "dist"
