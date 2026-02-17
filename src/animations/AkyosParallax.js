@@ -6,14 +6,13 @@ if (process.env.NODE_ENV !== 'test') {
 }
 
 /**
- * Options de configuration pour l'effet de translation.
+ * Options de configuration pour l'effet de parallaxe.
  * @typedef {Object} AkyosParallaxOptions
- * @property {number|string} [start='top 80%'] - Point de départ de l'animation.
- * @property {number} [distance=100] - Distance de l'animation.
- * @property {boolean} [markers=false] - Affiche les marqueurs de déclenchement de l'animation.
- * @property {number|string} [end='bottom bottom'] - Point de fin de l'animation.
- * @property {number} [speed=0.5] - Vitesse de l'effet de parallaxe.
- * @property {number} [stretch=200] - Étirement de l'image pour compenser le mouvement.
+ * @property {number|string} [start='top bottom'] - Point de départ ScrollTrigger.
+ * @property {number|string} [end='bottom top'] - Point de fin ScrollTrigger.
+ * @property {number} [distance=200] - Distance de déplacement en pixels.
+ * @property {number} [speed=1] - Vitesse de l'effet de parallaxe.
+ * @property {boolean} [markers=false] - Affiche les marqueurs de debug.
  */
 export class AkyosParallax {
 
@@ -31,7 +30,6 @@ export class AkyosParallax {
             start: 'top bottom',
             end: 'bottom top',
             speed: 1,
-            stretch: 200,
             distance: 200,
             markers: false,
             ...options
@@ -51,11 +49,14 @@ export class AkyosParallax {
         this.img = img;
         this.originalHeight = img.style.height;
         this.originalObjectPosition = img.style.objectPosition;
-
-        img.style.height = img.parentElement.offsetHeight + this.options.stretch + 'px';
+        this.originalObjectFit = img.style.objectFit;
 
         const parallaxAmount = Math.round(-this.options.distance * this.options.speed);
+        const containerHeight = this.element.offsetHeight;
+        const stretch = Math.ceil(Math.abs(parallaxAmount) * 1.5);
 
+        img.style.objectFit = 'cover';
+        img.style.height = containerHeight + stretch + 'px';
         img.style.objectPosition = `center ${parallaxAmount * 2}px`;
 
         this.animation = gsap.to(img, {
@@ -85,6 +86,7 @@ export class AkyosParallax {
         if (this.img) {
             this.img.style.height = this.originalHeight;
             this.img.style.objectPosition = this.originalObjectPosition;
+            this.img.style.objectFit = this.originalObjectFit;
         }
     }
 }

@@ -235,10 +235,11 @@ Effet parallaxe sur les images pour créer de la profondeur.
 |--------|------|--------|-------------|
 | `speed` | `number` | `1` | Vitesse de l'effet parallaxe |
 | `distance` | `number` | `200` | Distance de déplacement en pixels |
-| `stretch` | `number` | `200` | Étirement de l'image pour compenser |
 | `start` | `string` | `'top bottom'` | Point de départ ScrollTrigger |
 | `end` | `string` | `'bottom top'` | Point de fin ScrollTrigger |
 | `markers` | `boolean` | `false` | Affiche les marqueurs de debug |
+
+> **Note** : L'étirement de l'image pour éviter les coupures est calculé automatiquement selon `distance` et `speed`.
 
 #### Structure HTML requise
 
