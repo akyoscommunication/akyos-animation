@@ -53,6 +53,14 @@ export class AkyosAttributeLoader {
      * @param {HTMLElement} element - L'élément sur lequel appliquer l'animation
      * @returns {Object} Un objet contenant les options de l'animation
      */
+    parseValue(value) {
+        if (value === 'true') return true;
+        if (value === 'false') return false;
+        if (value === 'null') return null;
+        if (!isNaN(Number(value)) && value.trim() !== '') return Number(value);
+        return value;
+    }
+
     extractOptions(element) {
         const options = {};
 
@@ -63,7 +71,7 @@ export class AkyosAttributeLoader {
                     .replace('akyos-animation-', '')
                     .replace(/-([a-z])/g, (match, letter) => letter.toUpperCase());
 
-                options[key] = isNaN(Number(attr.value)) ? attr.value : Number(attr.value);
+                options[key] = this.parseValue(attr.value);
             }
         });
 
